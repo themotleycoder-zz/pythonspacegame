@@ -21,6 +21,7 @@ maxMissiles = 10
 numberOfMeteors = 10
 maxVal = 10
 score = 0
+
 pygame.font.init()
 
 class Player(pygame.sprite.Sprite):
@@ -147,6 +148,12 @@ def message_display(text):
 pygame.init()
 pygame.mixer.init()
 
+#load all graphics
+background_image = pygame.image.load(path.join(img_dir, "spacefield_a-000.png")).convert()
+w, h = background_image.get_size()
+background_image = pygame.transform.scale(background_image, (int(w * 0.8), int(h * 0.96)))
+background_rect = background_image.get_rect()
+
 #load all sounds
 shoot_sound = pygame.mixer.Sound(path.join(snd_dir, "explosion.wav"))
 explosion_sound = pygame.mixer.Sound(path.join(snd_dir, "8bit_bomb_explosion.wav"))
@@ -199,6 +206,7 @@ while running:
 
     #Render screen
     screen.fill(BLACK)
+    screen.blit(background_image, background_rect)
     message_display("Score:" + str(score))
     all_sprites.draw(screen)
     #Now flip the display
